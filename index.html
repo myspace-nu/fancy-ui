@@ -104,6 +104,164 @@ new fancySlider(".mySlider", {
 			</code></pre>
 		</div>
 
+		<h2>Parallax Scroll</h2>
+		<div>
+			<div class="fancy-parallax-scroll myParallaxScroll" style="height:200px; background-image: url('https://images.unsplash.com/photo-1706883376540-b21e5559fc45?w=1000');">
+			</div>
+			<script>
+			new fancyParallaxScroll(".myParallaxScroll");
+			</script>
+			<pre class="my-5"><code>
+&lt;div class="fancy-parallax-scroll myParallaxScroll" style="height:200px; background-image: url('https://images.unsplash.com/photo-1706883376540-b21e5559fc45');"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+new fancyParallaxScroll(".myParallaxScroll");
+&lt;/script&gt;
+			</code></pre>
+		</div>
+
+		<h2>Sticky Background</h2>
+		<div>
+			<div class="fancy-sticky-background" style="height:400px; background-image: url('https://images.unsplash.com/photo-1610568781018-995405522539?q=80&w=1920');"></div>
+			<pre class="my-5"><code>
+&lt;div class="fancy-sticky-background" style="height:400px; background-image: url('https://images.unsplash.com/photo-1610568781018-995405522539?q=80&w=1920');"&gt;
+...
+&lt;/div&gt;
+			</code></pre>
+		</div>
+
+		<h2>Responsive Tabs</h2>
+		<div>
+			<div class="fancy-tabs" style="min-height:200px;">
+				<ul class="tabs">
+					<li data-icon="<i class='fa-solid fa-house'></i>" data-opens="tab-content-1" class="active">Home</li>
+					<li data-icon="<i class='fa-solid fa-music'></i>" data-opens="tab-content-2">Music</li>
+					<li data-icon="<i class='fa-solid fa-comments'></i>" class="disabled">Comments (disabled)</li>
+					<li data-icon="<i class='fa-solid fa-gear'></i>" data-opens="tab-content-4">Settings</li>
+					<li data-icon="<i class='fa-brands fa-google' style='color:#34A853;'></i>" class="spacer"><a href="https://google.se">Google</a></li>
+				</ul>
+				<section data-id="tab-content-1">
+					<h3>Home</h3>
+					<p>Lorem ipsum...</p>
+				</section>
+				<section data-id="tab-content-2">
+					<h3>Music</h3>
+					<p>Lorem ipsum...</p>
+				</section>
+				<section data-id="tab-content-4">
+					<h3>Settings</h3>
+					<p>Lorem ipsum...</p>
+				</section>
+			</div>
+			<script>
+				new fancyTabs();
+			</script>
+			<pre class="my-5"><code>
+&lt;div class="fancy-tabs" style="min-height:200px;"&gt;
+	&lt;ul class="tabs"&gt;
+		&lt;li data-icon="&lt;i class='fa-solid fa-house'&gt;&lt;/i&gt;" data-opens="tab-content-1" class="active"&gt;Home&lt;/li&gt;
+		&lt;li data-icon="&lt;i class='fa-solid fa-music'&gt;&lt;/i&gt;" data-opens="tab-content-2"&gt;Music&lt;/li&gt;
+		&lt;li data-icon="&lt;i class='fa-solid fa-comments'&gt;&lt;/i&gt;" class="disabled"&gt;Comments (disabled)&lt;/li&gt;
+		&lt;li data-icon="&lt;i class='fa-solid fa-gear'&gt;&lt;/i&gt;" data-opens="tab-content-4"&gt;Settings&lt;/li&gt;
+		&lt;li data-icon="&lt;i class='fa-brands fa-google' style='color:#34A853;'&gt;&lt;/i&gt;" class="spacer"&gt;&lt;a href="https://google.se"&gt;Google&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;section data-id="tab-content-1"&gt;
+		&lt;h3&gt;Home&lt;/h3&gt;
+		&lt;p&gt;Lorem ipsum...&lt;/p&gt;
+	&lt;/section&gt;
+	&lt;section data-id="tab-content-2"&gt;
+		&lt;h3&gt;Music&lt;/h3&gt;
+		&lt;p&gt;Lorem ipsum...&lt;/p&gt;
+	&lt;/section&gt;
+	&lt;section data-id="tab-content-4"&gt;
+		&lt;h3&gt;Settings&lt;/h3&gt;
+		&lt;p&gt;Lorem ipsum...&lt;/p&gt;
+	&lt;/section&gt;
+&lt;/div&gt;
+&lt;script&gt;
+new fancyTabs();
+&lt;/script&gt;
+			</code></pre>
+		</div>
+
+		<h2>Context Menu</h2>
+		<div>
+			<div class="card shadow-sm my-5 myContextMenu">
+				<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+					role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+					<title>Placeholder</title>
+					<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+						dx="-2em">Test area</text>
+				</svg>
+				<div class="card-body">
+					<p class="card-text">Right-click anywhere inside this card to access the context menu.</p>
+				</div>
+			</div>
+			<script id="fancy-context-menu" type="text/x-fancytemplate">
+				<ul>
+					<li>
+						<a href=""><strong>Specialties</strong></a>
+						<ul>
+							<li>
+								<a href=""><strong>Vegan</strong></a>
+								<ul>
+									<li><a href="#">Lorem ipsum</a></li>
+									<li><a href="#">Lorem ipsum</a></li>
+									<li><a href="#">Lorem ipsum</a></li>
+									<li><a href="#">Lorem ipsum</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Lorem ipsum</a></li>
+							<li><a href="#">Lorem ipsum</a></li>
+							<li><a href="#">Lorem ipsum</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><strong>Drinks</strong></a>
+						<ul>
+							<li><a href="#">Lorem ipsum</a></li>
+							<li><a href="#">Lorem ipsum</a></li>
+						</ul>
+					</li>
+					<li><hr /></li>
+					<li>
+						<a href="#"><strong>Desserts</strong></a>
+						<ul>
+							<li><a href="#">Lorem ipsum</a></li>
+							<li><a href="#">Lorem ipsum</a></li>
+						</ul>
+					</li>
+				</ul>
+			</script>
+			<script>
+				new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
+					onClick: (event, link) => {
+						event.preventDefault();
+						alert(`You selected ${link.href}`);
+					},
+					content: "#fancy-context-menu"
+				});
+			</script>
+			<pre class="my-5"><code>
+&lt;div class="myContextMenu"&gt;
+...Context menu enabled area...
+&lt;/div&gt;
+
+&lt;script id="fancy-context-menu" type="text/x-fancytemplate"&gt;
+...Context menu markup...
+&lt;/script&gt;
+
+&lt;script&gt;
+new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
+	onClick: (event, link) => {
+		console.log(link.href);
+	},
+	content: "#fancy-context-menu"
+});
+&lt;/script&gt;
+			</code></pre>
+		</div>
+
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

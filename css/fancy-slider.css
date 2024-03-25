@@ -15,6 +15,7 @@
 	height: 400px;
 	position: relative;
 	overflow: hidden;
+	max-width: 100%;
 }
 .fancy-slider .slide {
 	position: absolute;
@@ -185,6 +186,9 @@
 	position: absolute;
 	padding: 0.4em;
 	border-radius: 0.2em;
+	max-width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 /* Caption positions */
 .fancy-slider .caption-top {

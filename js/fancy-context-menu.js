@@ -1,6 +1,8 @@
-class fancyContextMenu {
+if (typeof window.fancyContextMenu === 'undefined') {
+window.fancyContextMenu = class {
 	constructor(selector, options) {
 		this.options = Object.assign({
+			trigger: 'contextmenu',
 			onClick: () => { }
 		}, options)
 		this.nodes = [];
@@ -22,7 +24,7 @@ class fancyContextMenu {
 			this.content = this.options.content;
 		}
 		for (const el of this.nodes) {
-			el.addEventListener('contextmenu', function (e) {
+			el.addEventListener(this.options.trigger, function (e) {
 				e.preventDefault();
 				e.stopPropagation();
 				instance.init(e);
@@ -73,4 +75,5 @@ class fancyContextMenu {
 			this.container = null;
 		}
 	}
+}
 }

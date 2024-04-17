@@ -1,4 +1,5 @@
-class fancyParallaxScroll  {
+if (typeof window.fancyParallaxScroll === 'undefined') {
+window.fancyParallaxScroll = class {
 	constructor(selector = '.fancy-parallax-scroll', options) {
 		this.options = Object.assign({
 
@@ -33,4 +34,5 @@ class fancyParallaxScroll  {
 		});
 		return this;
 	}
+}
 }

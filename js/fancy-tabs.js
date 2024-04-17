@@ -1,4 +1,5 @@
-class fancyTabs {
+if (typeof window.fancyTabs === 'undefined') {
+window.fancyTabs = class {
 	constructor(selector = '.fancy-tabs', options) {
 		this.options = Object.assign({
 
@@ -62,4 +63,5 @@ class fancyTabs {
 		});
 		return this;
 	}
+}
 }

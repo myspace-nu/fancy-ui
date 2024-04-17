@@ -1,4 +1,5 @@
-class fancySlider {
+if (typeof window.fancySlider === 'undefined') {
+window.fancySlider = class {
 	constructor(selector, options){
 		this.options = Object.assign({
 			history: true,
@@ -157,4 +158,5 @@ class fancySlider {
 		if(this.options.autoplay)
 			this.start();
 	}
+}
 }

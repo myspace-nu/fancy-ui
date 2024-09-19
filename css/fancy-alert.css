@@ -1,0 +1,82 @@
+.fancy-alert {
+	position: relative;
+	border: solid rgba(0, 0, 0, 0.2) 1px;
+	border-radius: 0.5em;
+	display: flex;
+	align-items: stretch;
+	color: white;
+	font-size: 0.9em;
+	margin: 0.5em 0;
+}
+
+.fancy-alert.fancy-alert-success {
+	background-color: #36b37e;
+}
+
+.fancy-alert.fancy-alert-success.fancy-alert-discrete {
+	background-color: #bfecd9;
+	color: rgba(0, 0, 0, 0.75);
+}
+
+.fancy-alert.fancy-alert-info {
+	background-color: #00b8d9;
+}
+
+.fancy-alert.fancy-alert-info.fancy-alert-discrete {
+	background-color: #a7f2ff;
+	color: rgba(0, 0, 0, 0.75);
+}
+
+.fancy-alert.fancy-alert-warning {
+	background-color: #ffab00;
+}
+
+.fancy-alert.fancy-alert-warning.fancy-alert-discrete {
+	background-color: #ffe6b3;
+	color: rgba(0, 0, 0, 0.75);
+}
+
+.fancy-alert.fancy-alert-error {
+	background-color: #ff5630;
+}
+
+.fancy-alert.fancy-alert-error.fancy-alert-discrete {
+	background-color: #ffccc1;
+	color: rgba(0, 0, 0, 0.75);
+}
+
+.fancy-alert .fancy-alert-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 3em;
+}
+
+.fancy-alert.fancy-alert-discrete .fancy-alert-icon {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.fancy-alert .fancy-alert-close {
+	top: 0.1em;
+	right: 0.25em;
+	position: absolute;
+	cursor: pointer;
+	padding: 0.25em 0.5em;
+	border-radius: 50%;
+}
+
+.fancy-alert .fancy-alert-close:hover {
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.fancy-alert.fancy-alert-discrete .fancy-alert-close:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.fancy-alert .fancy-alert-message {
+	display: grid;
+	align-items: center;
+	padding: 0.5em;
+	min-height: 2em;
+}

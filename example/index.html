@@ -262,6 +262,25 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 			</code></pre>
 		</div>
 
+		<h2>Alert</h2>
+		<div>
+			<div id="fancy-alert-here"></div>
+			<script>
+				let myAlert = new fancyAlert("#fancy-alert-here").show("<strong>Information</strong>This is an information alert.", {
+					icon: '<i class="fa-solid fa-circle-info"></i>',
+					discrete: true
+				});				
+			</script>
+			<pre class="my-5"><code>
+&lt;div id="fancy-alert-here"&gt;&lt;/div&gt;
+&lt;script&gt;
+	let myAlert = new fancyAlert("#fancy-alert-here").show("&lt;strong&gt;Information&lt;/strong&gt;This is an information alert.", {
+		icon: '&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt;',
+		discrete: true
+	});				
+&lt;/script&gt;
+			</code></pre>
+		</div>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

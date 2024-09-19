@@ -1,5 +1,5 @@
 {
-  "name": "fancy-ui",
+  "name": "@myspace-nu/fancy-ui",
   "version": "0.0.2",
   "description": "Fancy UI - A collection of UI widgets",
   "main": "dist/fancy-ui.min.js",

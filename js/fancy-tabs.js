@@ -1,18 +1,22 @@
 if (typeof window.fancyTabs === 'undefined') {
 window.fancyTabs = class {
-	constructor(selector = '.fancy-tabs', options) {
-		this.options = Object.assign({
-
-		}, options)
+	constructor(selector, options) {
 		this.nodes = [];
 		if (typeof selector === 'string') {
 			this.nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
-		} else if (typeof selector === 'object' && selector.length === undefined) {
+		} else if (Node.prototype.isPrototypeOf(selector)) {
 			this.nodes.push(selector);
-		} else if (typeof selector === 'object' && selector.length > 0) {
+		} else if (NodeList.prototype.isPrototypeOf(selector) || HTMLCollection.prototype.isPrototypeOf(selector) ) {
 			this.nodes = Array.prototype.slice.call(selector);
+		} else if (selector => !!selector && Object.getPrototypeOf(selector) === Object.prototype) {
+			// Selector is omitted and first parameter is options
+			options = selector
+			this.nodes = Array.prototype.slice.call(document.querySelectorAll('.fancy-tabs'));
+		} else {
+			this.nodes = Array.prototype.slice.call(document.querySelectorAll('.fancy-tabs'));
 		}
-
+		this.options = Object.assign({
+		}, options)
 		for (const node of this.nodes) {
 			node.currentTab = null;
 			node.initTab = null;
@@ -20,6 +24,7 @@ window.fancyTabs = class {
 			node.querySelectorAll('ul.tabs>li').forEach((element, index) => {
 				element.dataset['html'] = element.innerHTML;
 				element.dataset['text'] = element.innerText;
+				element.title = element.innerText;
 				if (element.dataset['icon']) {
 					element.innerHTML = element.innerHTML.replace(element.innerText, element.dataset['icon'] + ' ' + element.innerText);
 				}
@@ -53,7 +58,7 @@ window.fancyTabs = class {
 		window.addEventListener('resize', () => {
 			for (const node of this.nodes) {
 				node.querySelectorAll('ul.tabs>li').forEach((element) => {
-					if (node.clientWidth < node.totalWidth) {
+					if (node.clientWidth < node.totalWidth && this.options.collapse!==false) {
 						element.innerHTML = element.dataset['html'].replace(element.dataset['text'], (element.dataset['icon'] || ((element.dataset['text'].length > 3) ? element.dataset['text'].substring(0, 3) + '…' : element.dataset['text'])));
 					} else {
 						element.innerHTML = (element.dataset['icon']) ? element.dataset['html'].replace(element.dataset['text'], element.dataset['icon'] + ' ' + element.dataset['text']) : element.dataset['html'];

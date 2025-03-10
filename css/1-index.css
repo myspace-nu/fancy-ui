@@ -9,3 +9,6 @@
 .fancy-tabs {
 	--accent-color: lightskyblue;
 }
+
+/* Masked input */
+input[data-slots] { font-family: monospace; }

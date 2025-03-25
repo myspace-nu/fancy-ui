@@ -308,6 +308,52 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 			</code></pre>
 		</div>
 
+		<h2>Dialog</h2>
+		<div id="fancydialog">
+			<button type="button" class="btn btn-secondary">
+				Open dialog
+			</button>
+			<script id="fancyDialogContent" type="text/x-template">
+				<h2>A fancy dialog</h2>
+				<form style="text-align: left;">
+					<label>Name</label>
+					<input class="form-control" type="text" name="name" placeholder="Name" required="required" />
+					<label>Serial number</label>
+					<input class="form-control" type="text" name="serial" placeholder="Serial number" required="required" pattern="^(\d{6})(,\d{6})*$" title="Enter one or more 6-digit numbers, separated by commas" />
+				</form>
+			</script>
+			<script>
+				document.querySelector("#fancydialog button").addEventListener("click", async (evt) => {
+					evt.preventDefault();
+					let dialogData = await fancyDialog({
+						content: document.querySelector("#fancyDialogContent"),
+						initialValues: { name: "Charles", serial: 123456 },
+						buttons: ["Create",{ text:"Abort", type:"abort" }]
+					}).promise;
+					if(dialogData.action==="create"){
+						new fancyAlert("#fancydialog").show("<strong>Result</strong>"+JSON.stringify(dialogData), {
+							icon: '<i class="fa-solid fa-circle-info"></i>',
+							discrete: true
+						});
+					}
+					return false;
+				});
+			</script>
+			<pre class="my-5"><code>
+let dialogData = await fancyDialog({
+	content: document.querySelector("#fancyDialogContent"),
+	initialValues: { name: "Charles", serial: 123456 },
+	buttons: ["Create",{ text:"Abort", type:"abort" }]
+}).promise;
+if(dialogData.action==="create"){
+	new fancyAlert("#fancydialog").show("&lt;strong&gt;Result&lt;/strong&gt;"+JSON.stringify(dialogData), {
+		icon: '&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt;',
+		discrete: true
+	});
+}
+			</code></pre>
+		</div>
+
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -308,6 +308,21 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 			</code></pre>
 		</div>
 
+		<h2>Autocomplete</h2>
+		<div>
+			<form>
+				<input type="text" style="display:inline;width:auto;" class="form-control autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off">
+			</form>
+			<script>
+				new fancyAutocomplete(".autocomplete");
+			</script>
+			<pre class="my-5"><code>
+&lt;input type="text" class="autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off"&gt;
+&lt;script&gt;
+new fancyAutocomplete(".autocomplete");
+&lt;/script&gt;</code></pre>
+		</div>
+
 		<h2>Dialog</h2>
 		<div id="fancydialog">
 			<button type="button" class="btn btn-secondary">

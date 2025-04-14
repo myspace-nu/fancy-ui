@@ -9,8 +9,8 @@
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/stackoverflow-light.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/myspace-nu/fancy-ui@main/dist/fancy-ui.min.css">
-	<script src="https://cdn.jsdelivr.net/gh/myspace-nu/fancy-ui@main/dist/fancy-ui.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@myspace-nu/fancy-ui@latest/dist/fancy-ui.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/@myspace-nu/fancy-ui@latest/dist/fancy-ui.min.js"></script>
 </head>
 
 <body>
@@ -271,6 +271,10 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 					discrete: true
 				});
 			</script>
+			<button type="button" class="btn btn-secondary"
+				onclick="new fancyAlert('#fancy-alert-here').show('<strong>Information</strong>This is an information alert.', { icon: '<i class=\'fa-solid fa-circle-info\'></i>', discrete: true });">
+				Open new alert
+			</button>
 			<pre class="my-5"><code>
 &lt;div id="fancy-alert-here"&gt;&lt;/div&gt;
 &lt;script&gt;
@@ -281,6 +285,90 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 &lt;/script&gt;
 			</code></pre>
 		</div>
+
+		<h2>Masked Input</h2>
+		<div>
+			<form id="maskedinput">
+				<label>Social security number</label><br />
+				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="YYYY MM DD-NNNN" data-slots="YMDN" data-validate="^\d{4} \d{2} \d{2}-\d{4}$" size="15" title="Enter social security number" /><br />
+				<!--
+				<label>Phone number</label><br />
+				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="+46 _______________" data-slots="_" data-accept="[\d\-]" size="15" /><br />
+				<label>Alphanumeric</label><br />
+				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="________" data-slots="_" data-accept="\w" size="8" /><br />
+				-->
+				<label>Credit card</label><br />
+				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder=".... .... .... ...." data-slots="." data-accept="\d" size="19" data-validate="^\d{4} \d{4} \d{4} \d{4}$" title="Enter credit card number" /><br />
+			</form>
+			<pre class="my-5"><code>
+&lt;label&gt;Social security number&lt;/label&gt;
+&lt;input type="text" placeholder="YYYY MM DD-NNNN" data-slots="YMDN" data-validate="^\d{4} \d{2} \d{2}-\d{4}$" size="15" title="Enter social security number" /&gt;
+&lt;label&gt;Credit card&lt;/label&gt;
+&lt;input type="text" placeholder=".... .... .... ...." data-slots="." data-accept="\d" size="19" data-validate="^\d{4} \d{4} \d{4} \d{4}$" title="Enter credit card number" /&gt;
+			</code></pre>
+		</div>
+
+		<h2>Autocomplete</h2>
+		<div>
+			<form>
+				<input type="text" style="display:inline;width:auto;" class="form-control autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off">
+			</form>
+			<script>
+				new fancyAutocomplete(".autocomplete");
+			</script>
+			<pre class="my-5"><code>
+&lt;input type="text" class="autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off"&gt;
+&lt;script&gt;
+new fancyAutocomplete(".autocomplete");
+&lt;/script&gt;</code></pre>
+		</div>
+
+		<h2>Dialog</h2>
+		<div id="fancydialog">
+			<button type="button" class="btn btn-secondary">
+				Open dialog
+			</button>
+			<script id="fancyDialogContent" type="text/x-template">
+				<h2>A fancy dialog</h2>
+				<form style="text-align: left;">
+					<label>Name</label>
+					<input class="form-control" type="text" name="name" placeholder="Name" required="required" />
+					<label>Serial number</label>
+					<input class="form-control" type="text" name="serial" placeholder="Serial number" required="required" pattern="^(\d{6})(,\d{6})*$" title="Enter one or more 6-digit numbers, separated by commas" />
+				</form>
+			</script>
+			<script>
+				document.querySelector("#fancydialog button").addEventListener("click", async (evt) => {
+					evt.preventDefault();
+					let dialogData = await fancyDialog({
+						content: document.querySelector("#fancyDialogContent"),
+						initialValues: { name: "Charles", serial: 123456 },
+						buttons: ["Create",{ text:"Abort", type:"abort" }]
+					}).promise;
+					if(dialogData.action==="create"){
+						new fancyAlert("#fancydialog").show("<strong>Result</strong>"+JSON.stringify(dialogData), {
+							icon: '<i class="fa-solid fa-circle-info"></i>',
+							discrete: true
+						});
+					}
+					return false;
+				});
+			</script>
+			<pre class="my-5"><code>
+let dialogData = await fancyDialog({
+	content: document.querySelector("#fancyDialogContent"),
+	initialValues: { name: "Charles", serial: 123456 },
+	buttons: ["Create",{ text:"Abort", type:"abort" }]
+}).promise;
+if(dialogData.action==="create"){
+	new fancyAlert("#fancydialog").show("&lt;strong&gt;Result&lt;/strong&gt;"+JSON.stringify(dialogData), {
+		icon: '&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt;',
+		discrete: true
+	});
+}
+			</code></pre>
+		</div>
+
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

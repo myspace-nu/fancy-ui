@@ -2,7 +2,8 @@ if (typeof window.fancyAutocomplete === 'undefined') {
 window.fancyAutocomplete = class {
 	constructor(selector, options) {
 		this.options = Object.assign({
-			deduplicate: true
+			deduplicate: true,
+			words: [],
 		}, options)
 		this.nodes = [];
 		const instance = this;
@@ -18,9 +19,9 @@ window.fancyAutocomplete = class {
 			list.className = "fancy-autocomplete-list";
 			input.parentNode.insertBefore(list, input.nextSibling);
 
-			let tags = input.dataset.autocomplete.split(",");
+			let words = this.options.words.concat(input.dataset.autocomplete.split(","));
 			if (this.options.deduplicate) {
-			  tags = [...new Set(tags.map(tag => tag.trim()))];
+			  words = [...new Set(words.map(word => word.trim()))];
 			}
 			let activeIndex = -1;
 
@@ -45,23 +46,24 @@ window.fancyAutocomplete = class {
 					return;
 				}
 
-				const enteredTags = input.value
+				const enteredWords = input.value
 					.split(/[\s,]+/)
-					.map(tag => tag.trim())
-					.filter(tag => tag.length > 0);
+					.map(word => word.trim())
+					.filter(word => word.length > 0);
 
-				const matches = tags
-					.map(tag => tag.trim())
-					.filter(tag => {
-						const lowerTag = tag.toLowerCase();
+				const matches = words
+					.map(word => word.trim())
+					.filter(word => {
+						const lcWord = word.toLowerCase();
 						if (this.options.deduplicate) {
-							const isDuplicate = enteredTags.some(
-								entered => entered.toLowerCase() === lowerTag
+							const isDuplicate = enteredWords.some(
+								entered => entered.toLowerCase() === lcWord
 							);
 							if (isDuplicate) return false;
 						}
-						return lowerTag.startsWith(currentWord);
-					});
+						return lcWord.startsWith(currentWord);
+					})
+					.sort();
 				  
 				if (matches.length === 0) {
 					list.style.display = "none";

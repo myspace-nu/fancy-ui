@@ -314,12 +314,12 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 				<input type="text" style="display:inline;width:auto;" class="form-control autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off">
 			</form>
 			<script>
-				new fancyAutocomplete(".autocomplete");
+				new fancyAutocomplete(".autocomplete",{words:["#more","#tags"]});
 			</script>
 			<pre class="my-5"><code>
 &lt;input type="text" class="autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off"&gt;
 &lt;script&gt;
-new fancyAutocomplete(".autocomplete");
+new fancyAutocomplete(".autocomplete",{words:["#more","#tags"]});
 &lt;/script&gt;</code></pre>
 		</div>
 

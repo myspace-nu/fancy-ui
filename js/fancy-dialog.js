@@ -16,7 +16,6 @@ if (typeof window.fancyDialog === 'undefined') {
 		}
 		const modalContent = document.createElement('div');
 		modalContent.className = 'fancy-dialog-content'
-		console.log();
 		modalContent.innerHTML = (options.content instanceof HTMLElement && options.content.type?.match(/text/i)) ? options.content.textContent :
 			(options.content instanceof HTMLElement) ? options.content.innerHTML :
 			(options.content) ? options.content :
@@ -37,8 +36,10 @@ if (typeof window.fancyDialog === 'undefined') {
 		modal.appendChild(modalContent)
 		document.body.appendChild(modal);
 		modal.style.display = 'flex';
+		document.body.classList.add('fancy-noscroll');
 		const closeModal = () => {
 			modal.style.display = 'none';
+			document.body.classList.remove('fancy-noscroll');
 			modal.remove();
 		}
 		const promise = new Promise((resolve, reject) => {

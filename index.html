@@ -270,6 +270,11 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 					icon: '<i class="fa-solid fa-circle-info"></i>',
 					discrete: true
 				});
+				new fancyAlert("#fancy-alert-here").show("<strong>Error</strong>This is an error alert.", {
+					icon: '<i class="fa-solid fa-warning"></i>',
+					type: 'error',
+					discrete: true
+				});
 			</script>
 			<button type="button" class="btn btn-secondary"
 				onclick="new fancyAlert('#fancy-alert-here').show('<strong>Information</strong>This is an information alert.', { icon: '<i class=\'fa-solid fa-circle-info\'></i>', discrete: true });">
@@ -365,6 +370,33 @@ if(dialogData.action==="create"){
 		icon: '&lt;i class="fa-solid fa-circle-info"&gt;&lt;/i&gt;',
 		discrete: true
 	});
+}
+			</code></pre>
+		</div>
+
+		<h2>UI Blocker</h2>
+		<div id="fancyblocker">
+			<button type="button" class="btn btn-secondary">
+				Show blocker for 5 seconds
+			</button>
+			<script>
+				document.querySelector("#fancyblocker button").addEventListener("click", async (evt) => {
+					evt.preventDefault();
+					let blocker = new fancyBlocker({spinner:true}).show();
+					window.setTimeout(()=>{
+						blocker.hide();
+					}, 5000);
+					return false;
+				});
+			</script>
+			<pre class="my-5"><code>
+document.querySelector("#fancyblocker button").addEventListener("click", async (evt) =&gt; {
+	evt.preventDefault();
+	let blocker = new fancyBlocker({spinner:true}).show();
+	window.setTimeout(()=&gt;{
+		blocker.hide();
+	}, 5000);
+	return false;
 }
 			</code></pre>
 		</div>

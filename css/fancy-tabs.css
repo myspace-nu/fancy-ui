@@ -25,7 +25,7 @@
 .fancy-tabs li.active {
   border-color: #dee2e6;
   padding-top: calc(.5rem - 3px);
-  border-top: solid var(--accent-color) 3px;
+  border-top: solid var(--fancy-accent-color) 3px;
   border-bottom: 1px solid transparent;
 }
 .fancy-tabs li.disabled {

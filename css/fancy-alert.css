@@ -10,38 +10,38 @@
 }
 
 .fancy-alert.fancy-alert-success {
-	background-color: #36b37e;
+	background-color: var(--fancy-color-success);
 }
 
 .fancy-alert.fancy-alert-success.fancy-alert-discrete {
-	background-color: #bfecd9;
+	background-color: var(--fancy-color-success-light);
 	color: rgba(0, 0, 0, 0.75);
 }
 
 .fancy-alert.fancy-alert-info {
-	background-color: #00b8d9;
+	background-color: var(--fancy-color-info);
 }
 
 .fancy-alert.fancy-alert-info.fancy-alert-discrete {
-	background-color: #a7f2ff;
+	background-color: var(--fancy-color-info-light);
 	color: rgba(0, 0, 0, 0.75);
 }
 
 .fancy-alert.fancy-alert-warning {
-	background-color: #ffab00;
+	background-color: var(--fancy-color-warning);
 }
 
 .fancy-alert.fancy-alert-warning.fancy-alert-discrete {
-	background-color: #ffe6b3;
+	background-color: var(--fancy-color-warning-light);
 	color: rgba(0, 0, 0, 0.75);
 }
 
 .fancy-alert.fancy-alert-error {
-	background-color: #ff5630;
+	background-color: var(--fancy-color-error);
 }
 
 .fancy-alert.fancy-alert-error.fancy-alert-discrete {
-	background-color: #ffccc1;
+	background-color: var(--fancy-color-error-light);
 	color: rgba(0, 0, 0, 0.75);
 }
 

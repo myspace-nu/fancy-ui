@@ -6,9 +6,26 @@
  * Released under the MIT license
 */
 
-.fancy-tabs {
-	--accent-color: lightskyblue;
+:root {
+	--fancy-muted-color: #d4f0fc;
+	--fancy-accent-color: #89d6fb;
+	--fancy-primary-color: #02a9f7;
+	--fancy-secondary-color: #02577a;
+	--fancy-dark-color: #01303f;
+
+	--fancy-color-success: #36b37e;
+	--fancy-color-success-light: color-mix(in srgb, var(--fancy-color-success) 30%, white 70%);
+	--fancy-color-info: #00b8d9;
+	--fancy-color-info-light: color-mix(in srgb, var(--fancy-color-info) 30%, white 70%);
+	--fancy-color-warning: #ffab00;
+	--fancy-color-warning-light: color-mix(in srgb, var(--fancy-color-warning) 30%, white 70%);
+	--fancy-color-error: #ff5630;
+	--fancy-color-error-light: color-mix(in srgb, var(--fancy-color-error) 30%, white 70%);
 }
 
 /* Masked input */
 input[data-slots] { font-family: monospace; }
+
+.fancy-noscroll {
+	overflow: hidden !important;
+}

@@ -7,6 +7,8 @@ window.fancySlider = class {
 			pagination: false,
 			preloadImages: true,
 			autoplayDelay: 5000,
+			useZoom: false,
+			zoomPercent: 200,
 			onShow: ()=>{},
 			onStart: ()=>{},
 			onStop: ()=>{}
@@ -22,6 +24,7 @@ window.fancySlider = class {
 		}
 		this.element = selector[0];
 		this.currentSlide = null;
+		this.isZoomed = false;
 
 		// Save initial slide classes
 		this.element.querySelectorAll(".slide").forEach((element,index) => {
@@ -88,6 +91,28 @@ window.fancySlider = class {
 			appendTo.appendChild(this.paginationElement);
 		}
 
+		if(this.options.useZoom){
+			this.element.addEventListener("mouseenter", (event)=>{
+				let slides = this.element.querySelectorAll(".slide");
+				const div = slides[this.currentSlide-1];
+				div.style.backgroundSize = `${Math.min(Math.max(this.options.zoomPercent,100),500)}%`;
+				this.isZoomed = true;
+			});
+			this.element.addEventListener("mouseleave", (event)=>{
+				let slides = this.element.querySelectorAll(".slide");
+				const div = slides[this.currentSlide-1];
+				div.style.backgroundSize = "cover";
+				this.isZoomed = false;
+			});
+			this.element.addEventListener("mousemove", (event)=>{
+				let slides = this.element.querySelectorAll(".slide");
+				const div = slides[this.currentSlide-1];
+				const rect = div.getBoundingClientRect();
+				const xPct = ((event.clientX - rect.left) / rect.width)  * 100;
+				const yPct = ((event.clientY - rect.top)  / rect.height) * 100;
+				div.style.backgroundPosition = `${xPct}% ${yPct}%`;
+			});
+		}
 		if(this.options.autoplay){
 			this.start();
 		}
@@ -96,6 +121,11 @@ window.fancySlider = class {
 		return this;
 	}
 	show(n){
+		if(this.isZoomed){
+			let isZoomed = this.isZoomed;
+			this.element.dispatchEvent(new Event('mouseleave'));
+			this.isZoomed = isZoomed;
+		}
 		let slides = this.element.querySelectorAll(".slide");
 		let direction = (n>this.currentSlide) ? "Right" : "Left";
 		let revDirection = (direction=="Right") ? "Left" : "Right";
@@ -135,6 +165,11 @@ window.fancySlider = class {
 			this.paginationElement.innerHTML = this.currentSlide + " / " + slides.length;		 
 		}
 		this.options.onShow.call(this,this);
+		if(this.isZoomed){
+			let isZoomed = this.isZoomed;
+			this.element.dispatchEvent(new Event('mouseenter'));
+			this.isZoomed = isZoomed;
+		}
 	}
 	start(){
 		this.stop();

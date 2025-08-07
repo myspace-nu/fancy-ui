@@ -16,6 +16,7 @@ window.fancyTabs = class {
 			this.nodes = Array.prototype.slice.call(document.querySelectorAll('.fancy-tabs'));
 		}
 		this.options = Object.assign({
+			collapse: true
 		}, options)
 		for (const node of this.nodes) {
 			node.currentTab = null;
@@ -55,16 +56,38 @@ window.fancyTabs = class {
 				node.initTab.click();
 			}
 		}
-		window.addEventListener('resize', () => {
+		const onResize = () => {
 			for (const node of this.nodes) {
+				const ulStyle = node.querySelector('ul.tabs').currentStyle || window.getComputedStyle(node.querySelector('ul.tabs'));
 				node.querySelectorAll('ul.tabs>li').forEach((element) => {
-					if (node.clientWidth < node.totalWidth && this.options.collapse!==false) {
-						element.innerHTML = element.dataset['html'].replace(element.dataset['text'], (element.dataset['icon'] || ((element.dataset['text'].length > 3) ? element.dataset['text'].substring(0, 3) + '…' : element.dataset['text'])));
+					if (node.clientWidth-parseInt(ulStyle['padding-left'])-parseInt(ulStyle['padding-right']) < node.totalWidth) {
+						if(this.options.collapse){
+							element.innerHTML = element.dataset['html'].replace(element.dataset['text'], (element.dataset['icon'] || ((element.dataset['text'].length > 3) ? element.dataset['text'].substring(0, 3) + '…' : element.dataset['text'])));
+						} else {
+							element.innerHTML = (element.dataset['icon']) ? element.dataset['html'].replace(element.dataset['text'], element.dataset['icon'] + ' ' + element.dataset['text']) : element.dataset['html'];
+							element.style.width="calc(100%)";
+							element.style.marginLeft="0";
+						}
 					} else {
 						element.innerHTML = (element.dataset['icon']) ? element.dataset['html'].replace(element.dataset['text'], element.dataset['icon'] + ' ' + element.dataset['text']) : element.dataset['html'];
+						element.style.width="";
+						element.style.marginLeft="";
 					}
 				});
 			}
+		};
+		window.addEventListener('load', () => {
+			for (const node of this.nodes) {
+				node.totalWidth = 0;
+				node.querySelectorAll('ul.tabs>li').forEach((element, index) => {
+					const style = element.currentStyle || window.getComputedStyle(element);
+					node.totalWidth += (element.offsetWidth + parseInt(style['margin-left']));
+				});
+			}
+			window.addEventListener('resize', () => {
+				onResize();
+			});
+			onResize();
 		});
 		return this;
 	}

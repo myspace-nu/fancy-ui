@@ -2,7 +2,7 @@
 .fancy-tabs ul.tabs {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 1rem;
+  padding: 0 1rem;
   /* margin-bottom: 0; */
   list-style: none;
   border-bottom: 1px solid #dee2e6;

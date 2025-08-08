@@ -11,76 +11,207 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<link rel="stylesheet" href="dist/fancy-ui.min.css">
 	<script src="dist/fancy-ui.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+			padding-top: 60px;
+		}
+		pre {
+			max-width: 100vw;
+		}
+		/* Table of contents */
+		aside ul {
+			padding: 1rem;
+		}
+		aside ul li {
+			list-style: none;
+		}
+		aside ul li a {
+			color: unset;
+			text-decoration: none;
+		}
+
+		header {
+			position: fixed;
+			top: 0;
+			height: 60px;
+			background: #333;
+			color: white;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			padding: 0 1rem;
+			z-index: 1000;
+		}
+
+		.article-block {
+			display: grid;
+			grid-template-columns: 250px 1fr;
+			gap: 1rem;
+			padding: 1rem;
+			align-items: start;
+			position: relative;
+		}
+
+		.article-block .sidebar {
+			position: sticky;
+			top: 0px;
+			/* below fixed header */
+			background-color:rgba(255,255,255,0.9);
+			padding: 1rem;
+			border-right: 1px solid #ccc;
+		}
+
+		.article-block article {
+			padding: 1rem;
+		}
+
+		/* Responsive menu */
+		.hamburger {
+			width: 30px;
+			height: 25px;
+			margin: 1em 1em 1em 0;
+			position: relative;
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 0;
+			display: none;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.hamburger span {
+			display: block;
+			height: 4px;
+			width: 100%;
+			background: white;
+			border-radius: 2px;
+			transition: all 0.3s ease;
+		}
+		.hamburger.open span:nth-child(1) {
+			transform: translateY(10px) rotate(45deg);
+		}
+		.hamburger.open span:nth-child(2) {
+			opacity: 0;
+		}
+		.hamburger.open span:nth-child(3) {
+			transform: translateY(-10px) rotate(-45deg);
+		}
+		@media (max-width: 768px) {
+			.article-block {
+				flex-direction: column;
+				padding: 1rem 0 0;
+				grid-template-columns: 0px 1fr;
+			}
+			.hamburger {
+				display: flex;
+			}
+			.sidebar {
+				position: fixed;
+				/* top: 60px; */
+				left: 0;
+				width: 250px;
+				padding: 1rem;
+				transform: translateX(-100%);
+				transition: transform 0.3s ease;
+				z-index: 999;
+			}
+			.sidebar.open {
+				transform: translateX(0);
+			}
+			.sidebar nav {
+				position: relative;
+				top: 0;
+				border: none;
+				background: none;
+				padding: 1rem 0;
+			}
+			.content {
+				padding: 1rem;
+			}
+		}
+	</style>
 </head>
 
 <body>
-	<div class="container">
-		<h1>Fancy UI - A collection of UI widgets</h1>
+	<header>
+		<button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<div class="title"><h1 style="font-size:1.5rem;">Fancy UI - A collection of UI widgets</h1></div>
+	</header>
 
-		<h2>Slider</h2>
-		<div>
-			<div class="fancy-slider mySlider">
-				<style>
-					/* Custom animations */
-					.fancy-slider .caption-customSlide {
-						animation-name: caption-customSlide;
-						animation-duration: 2s;
-						white-space: nowrap;
-						font-family: 'Roboto', sans-serif;
-						color:white;
-						background-color: rgba(0,0,0,0.4);
-						display: inline-block;
-						position: absolute;
-						padding: 0.1em;
-						top: 10%;
-						left: 50%;
-						transform: translateX(-50%) rotate(0deg);
-					}
-					@keyframes caption-customSlide {
-						from {
-							top: 150%;
-							left: 50%;
-							transform: translateX(-50%) rotate(720deg);
-						}
-						to {
-							top: 10%;
-							left: 50%;
-							transform: translateX(-50%) rotate(0deg);
-						}
-					}
-				</style>
-				<div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1576313269137-5c777923908f?&auto=format&fit=crop&fp-y=.70&w=800&h=600&q=80');">
-				<div class="caption caption-top caption-center caption-slideUp">
-					<h1><strong>Fancy UI</strong></h1>
-				</div>
-				<div class="caption caption-top caption-center caption-slideUp" style="top:25%;">A collection of UI widgets</div>
-				<div class="caption caption-bottom caption-right">
-					<strong>Leopard (Panthera pardus)</strong><br />
-					<em><a href="https://unsplash.com/@hans_veth" target="_blank">&mdash; Hans Veth</a></em>
-				</div>
-				</div>
-				<div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1507563669246-aaee3fa9a174?auto=format&fit=crop&w=800&q=80');">
-					<div class="caption caption-top caption-center caption-slideUp">Lightweight, no dependencies, simple</div>
-					<div class="caption caption-bottom caption-right">
-						<strong>Long-tailed macaque (Macaca fascicularis)</strong><br />
-						<em><a href="https://unsplash.com/@vincentvanzalinge" target="_blank">&mdash; Vincent van Zalinge</a></em>
-					</div>
-				</div>
-				<div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1573483587794-092bab380d9b?auto=format&fit=crop&w=800&q=80');">
-					<div class="caption caption-customSlide"><h2>Yet so powerful!</h2></div>
-					<div class="caption caption-bottom caption-right">
-						<strong>Killer whale (Orcinus orca)</strong><br />
-						<em><a href="https://unsplash.com/@noaa" target="_blank">&mdash; The National Oceanic and Atmospheric Administration</a></em>
-					</div>
-				</div>
-			</div>
-			<script>
-			new fancySlider(".mySlider", {
-				navigation: true,
-				autoplay: true
-			});
-			</script>
-			<pre class="my-5"><code>
+	<div class="articles">
+		<section class="article-block">
+			<aside class="sidebar"></aside>
+			<article>
+				<div class="container">
+					<h2>Slider</h2>
+					<div>
+						<div class="fancy-slider mySlider">
+							<style>
+								/* Custom animations */
+								.fancy-slider .caption-customSlide {
+									animation-name: caption-customSlide;
+									animation-duration: 2s;
+									white-space: nowrap;
+									font-family: 'Roboto', sans-serif;
+									color:white;
+									background-color: rgba(0,0,0,0.4);
+									display: inline-block;
+									position: absolute;
+									padding: 0.1em;
+									top: 10%;
+									left: 50%;
+									transform: translateX(-50%) rotate(0deg);
+								}
+								@keyframes caption-customSlide {
+									from {
+										top: 150%;
+										left: 50%;
+										transform: translateX(-50%) rotate(720deg);
+									}
+									to {
+										top: 10%;
+										left: 50%;
+										transform: translateX(-50%) rotate(0deg);
+									}
+								}
+							</style>
+							<div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1576313269137-5c777923908f?&auto=format&fit=crop&fp-y=.70&w=800&h=600&q=80');">
+							<div class="caption caption-top caption-center caption-slideUp">
+								<h1><strong>Fancy UI</strong></h1>
+							</div>
+							<div class="caption caption-top caption-center caption-slideUp" style="top:25%;">A collection of UI widgets</div>
+							<div class="caption caption-bottom caption-right">
+								<strong>Leopard (Panthera pardus)</strong><br />
+								<em><a href="https://unsplash.com/@hans_veth" target="_blank">&mdash; Hans Veth</a></em>
+							</div>
+							</div>
+							<div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1507563669246-aaee3fa9a174?auto=format&fit=crop&w=800&q=80');">
+								<div class="caption caption-top caption-center caption-slideUp">Lightweight, no dependencies, simple</div>
+								<div class="caption caption-bottom caption-right">
+									<strong>Long-tailed macaque (Macaca fascicularis)</strong><br />
+									<em><a href="https://unsplash.com/@vincentvanzalinge" target="_blank">&mdash; Vincent van Zalinge</a></em>
+								</div>
+							</div>
+							<div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1573483587794-092bab380d9b?auto=format&fit=crop&w=800&q=80');">
+								<div class="caption caption-customSlide"><h2>Yet so powerful!</h2></div>
+								<div class="caption caption-bottom caption-right">
+									<strong>Killer whale (Orcinus orca)</strong><br />
+									<em><a href="https://unsplash.com/@noaa" target="_blank">&mdash; The National Oceanic and Atmospheric Administration</a></em>
+								</div>
+							</div>
+						</div>
+						<script>
+						new fancySlider(".mySlider", {
+							navigation: true,
+							autoplay: true
+						});
+						</script>
+						<pre class="my-5"><code>
 &lt;div class="fancy-slider mySlider"&gt;
 	&lt;div class="slide" data-transition="fade" style="background-image: url('https://images.unsplash.com/photo-1576313269137-5c777923908f');"&gt;
 		&lt;div class="caption caption-top caption-center caption-slideUp"&gt;
@@ -101,62 +232,62 @@ new fancySlider(".mySlider", {
 	autoplay: true
 });
 &lt;/script&gt;
-			</code></pre>
-		</div>
+						</code></pre>
+					</div>
 
-		<h2>Parallax Scroll</h2>
-		<div>
-			<div class="fancy-parallax-scroll myParallaxScroll" style="height:200px; background-image: url('https://images.unsplash.com/photo-1706883376540-b21e5559fc45?w=1000');">
-			</div>
-			<script>
-			new fancyParallaxScroll(".myParallaxScroll");
-			</script>
-			<pre class="my-5"><code>
+					<h2>Parallax Scroll</h2>
+					<div>
+						<div class="fancy-parallax-scroll myParallaxScroll" style="height:200px; background-image: url('https://images.unsplash.com/photo-1706883376540-b21e5559fc45?w=1000');">
+						</div>
+						<script>
+						new fancyParallaxScroll(".myParallaxScroll");
+						</script>
+						<pre class="my-5"><code>
 &lt;div class="fancy-parallax-scroll myParallaxScroll" style="height:200px; background-image: url('https://images.unsplash.com/photo-1706883376540-b21e5559fc45');"&gt;&lt;/div&gt;
 
 &lt;script&gt;
 new fancyParallaxScroll(".myParallaxScroll");
 &lt;/script&gt;
-			</code></pre>
-		</div>
-
-		<h2>Sticky Background</h2>
-		<div>
-			<div class="fancy-sticky-background" style="height:400px; background-image: url('https://images.unsplash.com/photo-1610568781018-995405522539?q=80&w=1920');"></div>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>Sticky Background</h2>
+					<div>
+						<div class="fancy-sticky-background" style="height:400px; background-image: url('https://images.unsplash.com/photo-1610568781018-995405522539?q=80&w=1920');"></div>
+						<pre class="my-5"><code>
 &lt;div class="fancy-sticky-background" style="height:400px; background-image: url('https://images.unsplash.com/photo-1610568781018-995405522539?q=80&w=1920');"&gt;
 ...
 &lt;/div&gt;
-			</code></pre>
-		</div>
-
-		<h2>Responsive Tabs</h2>
-		<div>
-			<div class="fancy-tabs" style="min-height:200px;">
-				<ul class="tabs">
-					<li data-icon="<i class='fa-solid fa-house'></i>" data-opens="tab-content-1" class="active">Home</li>
-					<li data-icon="<i class='fa-solid fa-music'></i>" data-opens="tab-content-2">Music</li>
-					<li data-icon="<i class='fa-solid fa-comments'></i>" class="disabled">Comments (disabled)</li>
-					<li data-icon="<i class='fa-solid fa-gear'></i>" data-opens="tab-content-4">Settings</li>
-					<li data-icon="<i class='fa-brands fa-google' style='color:#34A853;'></i>" class="spacer"><a href="https://google.se">Google</a></li>
-				</ul>
-				<section data-id="tab-content-1">
-					<h3>Home</h3>
-					<p>Lorem ipsum...</p>
-				</section>
-				<section data-id="tab-content-2">
-					<h3>Music</h3>
-					<p>Lorem ipsum...</p>
-				</section>
-				<section data-id="tab-content-4">
-					<h3>Settings</h3>
-					<p>Lorem ipsum...</p>
-				</section>
-			</div>
-			<script>
-				new fancyTabs();
-			</script>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>Responsive Tabs</h2>
+					<div>
+						<div class="fancy-tabs" style="min-height:200px;">
+							<ul class="tabs">
+								<li data-icon="<i class='fa-solid fa-house'></i>" data-opens="tab-content-1" class="active">Home</li>
+								<li data-icon="<i class='fa-solid fa-music'></i>" data-opens="tab-content-2">Music</li>
+								<li data-icon="<i class='fa-solid fa-comments'></i>" class="disabled">Comments (disabled)</li>
+								<li data-icon="<i class='fa-solid fa-gear'></i>" data-opens="tab-content-4">Settings</li>
+								<li data-icon="<i class='fa-brands fa-google' style='color:#34A853;'></i>" class="spacer"><a href="https://google.se">Google</a></li>
+							</ul>
+							<section data-id="tab-content-1">
+								<h3>Home</h3>
+								<p>Lorem ipsum...</p>
+							</section>
+							<section data-id="tab-content-2">
+								<h3>Music</h3>
+								<p>Lorem ipsum...</p>
+							</section>
+							<section data-id="tab-content-4">
+								<h3>Settings</h3>
+								<p>Lorem ipsum...</p>
+							</section>
+						</div>
+						<script>
+							new fancyTabs();
+						</script>
+						<pre class="my-5"><code>
 &lt;div class="fancy-tabs" style="min-height:200px;"&gt;
 	&lt;ul class="tabs"&gt;
 		&lt;li data-icon="&lt;i class='fa-solid fa-house'&gt;&lt;/i&gt;" data-opens="tab-content-1" class="active"&gt;Home&lt;/li&gt;
@@ -181,68 +312,68 @@ new fancyParallaxScroll(".myParallaxScroll");
 &lt;script&gt;
 new fancyTabs();
 &lt;/script&gt;
-			</code></pre>
-		</div>
-
-		<h2>Context Menu</h2>
-		<div>
-			<div class="card shadow-sm my-5 myContextMenu">
-				<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-					role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-					<title>Placeholder</title>
-					<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-						dx="-2em">Test area</text>
-				</svg>
-				<div class="card-body">
-					<p class="card-text">Right-click anywhere inside this card to access the context menu.</p>
-				</div>
-			</div>
-			<script id="fancy-context-menu" type="text/x-fancytemplate">
-				<ul>
-					<li>
-						<a href=""><strong>Specialties</strong></a>
-						<ul>
-							<li>
-								<a href=""><strong>Vegan</strong></a>
-								<ul>
-									<li><a href="#">Lorem ipsum</a></li>
-									<li><a href="#">Lorem ipsum</a></li>
-									<li><a href="#">Lorem ipsum</a></li>
-									<li><a href="#">Lorem ipsum</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Lorem ipsum</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="#"><strong>Drinks</strong></a>
-						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Lorem ipsum</a></li>
-						</ul>
-					</li>
-					<li><hr /></li>
-					<li>
-						<a href="#"><strong>Desserts</strong></a>
-						<ul>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Lorem ipsum</a></li>
-						</ul>
-					</li>
-				</ul>
-			</script>
-			<script>
-				new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
-					onClick: (event, link) => {
-						event.preventDefault();
-						alert(`You selected ${link.href}`);
-					},
-					content: "#fancy-context-menu"
-				});
-			</script>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>Context Menu</h2>
+					<div>
+						<div class="card shadow-sm my-5 myContextMenu">
+							<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+								role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+								<title>Placeholder</title>
+								<rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+									dx="-2em">Test area</text>
+							</svg>
+							<div class="card-body">
+								<p class="card-text">Right-click anywhere inside this card to access the context menu.</p>
+							</div>
+						</div>
+						<script id="fancy-context-menu" type="text/x-fancytemplate">
+							<ul>
+								<li>
+									<a href=""><strong>Specialties</strong></a>
+									<ul>
+										<li>
+											<a href=""><strong>Vegan</strong></a>
+											<ul>
+												<li><a href="#">Lorem ipsum</a></li>
+												<li><a href="#">Lorem ipsum</a></li>
+												<li><a href="#">Lorem ipsum</a></li>
+												<li><a href="#">Lorem ipsum</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Lorem ipsum</a></li>
+										<li><a href="#">Lorem ipsum</a></li>
+										<li><a href="#">Lorem ipsum</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="#"><strong>Drinks</strong></a>
+									<ul>
+										<li><a href="#">Lorem ipsum</a></li>
+										<li><a href="#">Lorem ipsum</a></li>
+									</ul>
+								</li>
+								<li><hr /></li>
+								<li>
+									<a href="#"><strong>Desserts</strong></a>
+									<ul>
+										<li><a href="#">Lorem ipsum</a></li>
+										<li><a href="#">Lorem ipsum</a></li>
+									</ul>
+								</li>
+							</ul>
+						</script>
+						<script>
+							new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
+								onClick: (event, link) => {
+									event.preventDefault();
+									alert(`You selected ${link.href}`);
+								},
+								content: "#fancy-context-menu"
+							});
+						</script>
+						<pre class="my-5"><code>
 &lt;div class="myContextMenu"&gt;
 ...Context menu enabled area...
 &lt;/div&gt;
@@ -259,28 +390,28 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 	content: "#fancy-context-menu"
 });
 &lt;/script&gt;
-			</code></pre>
-		</div>
-
-		<h2>Alert</h2>
-		<div>
-			<div id="fancy-alert-here"></div>
-			<script>
-				let myAlert = new fancyAlert("#fancy-alert-here").show("<strong>Information</strong>This is an information alert.", {
-					icon: '<i class="fa-solid fa-circle-info"></i>',
-					discrete: true
-				});
-				new fancyAlert("#fancy-alert-here").show("<strong>Error</strong>This is an error alert.", {
-					icon: '<i class="fa-solid fa-warning"></i>',
-					type: 'error',
-					discrete: true
-				});
-			</script>
-			<button type="button" class="btn btn-secondary"
-				onclick="new fancyAlert('#fancy-alert-here').show('<strong>Information</strong>This is an information alert.', { icon: '<i class=\'fa-solid fa-circle-info\'></i>', discrete: true });">
-				Open new alert
-			</button>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>Alert</h2>
+					<div>
+						<div id="fancy-alert-here"></div>
+						<script>
+							let myAlert = new fancyAlert("#fancy-alert-here").show("<strong>Information</strong>This is an information alert.", {
+								icon: '<i class="fa-solid fa-circle-info"></i>',
+								discrete: true
+							});
+							new fancyAlert("#fancy-alert-here").show("<strong>Error</strong>This is an error alert.", {
+								icon: '<i class="fa-solid fa-warning"></i>',
+								type: 'error',
+								discrete: true
+							});
+						</script>
+						<button type="button" class="btn btn-secondary"
+							onclick="new fancyAlert('#fancy-alert-here').show('<strong>Information</strong>This is an information alert.', { icon: '<i class=\'fa-solid fa-circle-info\'></i>', discrete: true });">
+							Open new alert
+						</button>
+						<pre class="my-5"><code>
 &lt;div id="fancy-alert-here"&gt;&lt;/div&gt;
 &lt;script&gt;
 	let myAlert = new fancyAlert("#fancy-alert-here").show("&lt;strong&gt;Information&lt;/strong&gt;This is an information alert.", {
@@ -288,78 +419,79 @@ new fancyContextMenu(document.querySelectorAll(".myContextMenu"), {
 		discrete: true
 	});
 &lt;/script&gt;
-			</code></pre>
-		</div>
-
-		<h2>Masked Input</h2>
-		<div>
-			<form id="maskedinput">
-				<label>Social security number</label><br />
-				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="YYYY MM DD-NNNN" data-slots="YMDN" data-validate="^\d{4} \d{2} \d{2}-\d{4}$" size="15" title="Enter social security number" /><br />
-				<!--
-				<label>Phone number</label><br />
-				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="+46 _______________" data-slots="_" data-accept="[\d\-]" size="15" /><br />
-				<label>Alphanumeric</label><br />
-				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="________" data-slots="_" data-accept="\w" size="8" /><br />
-				-->
-				<label>Credit card</label><br />
-				<input type="text" style="display:inline;width:auto;" class="form-control" placeholder=".... .... .... ...." data-slots="." data-accept="\d" size="19" data-validate="^\d{4} \d{4} \d{4} \d{4}$" title="Enter credit card number" /><br />
-			</form>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>Masked Input</h2>
+					<div>
+						<form id="maskedinput">
+							<label>Social security number</label><br />
+							<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="YYYY MM DD-NNNN" data-slots="YMDN" data-validate="^\d{4} \d{2} \d{2}-\d{4}$" size="15" title="Enter social security number" /><br />
+							<!--
+							<label>Phone number</label><br />
+							<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="+46 _______________" data-slots="_" data-accept="[\d\-]" size="15" /><br />
+							<label>Alphanumeric</label><br />
+							<input type="text" style="display:inline;width:auto;" class="form-control" placeholder="________" data-slots="_" data-accept="\w" size="8" /><br />
+							-->
+							<label>Credit card</label><br />
+							<input type="text" style="display:inline;width:auto;" class="form-control" placeholder=".... .... .... ...." data-slots="." data-accept="\d" size="19" data-validate="^\d{4} \d{4} \d{4} \d{4}$" title="Enter credit card number" /><br />
+						</form>
+						<pre class="my-5"><code>
 &lt;label&gt;Social security number&lt;/label&gt;
 &lt;input type="text" placeholder="YYYY MM DD-NNNN" data-slots="YMDN" data-validate="^\d{4} \d{2} \d{2}-\d{4}$" size="15" title="Enter social security number" /&gt;
 &lt;label&gt;Credit card&lt;/label&gt;
 &lt;input type="text" placeholder=".... .... .... ...." data-slots="." data-accept="\d" size="19" data-validate="^\d{4} \d{4} \d{4} \d{4}$" title="Enter credit card number" /&gt;
-			</code></pre>
-		</div>
-
-		<h2>Autocomplete</h2>
-		<div>
-			<form>
-				<input type="text" style="display:inline;width:auto;" class="form-control autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off">
-			</form>
-			<script>
-				new fancyAutocomplete(".autocomplete");
-			</script>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>Autocomplete</h2>
+					<div>
+						<form>
+							<input type="text" style="display:inline;width:auto;" class="form-control autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off">
+						</form>
+						<script>
+							new fancyAutocomplete(".autocomplete");
+						</script>
+						<pre class="my-5"><code>
 &lt;input type="text" class="autocomplete" data-autocomplete="#lorem,#ipsum,#solar,#amet,#foo,#bar,#baz" placeholder="Enter #tags..." autocomplete="off"&gt;
 &lt;script&gt;
 new fancyAutocomplete(".autocomplete");
-&lt;/script&gt;</code></pre>
-		</div>
-
-		<h2>Dialog</h2>
-		<div id="fancydialog">
-			<button type="button" class="btn btn-secondary">
-				Open dialog
-			</button>
-			<script id="fancyDialogContent" type="text/x-template">
-				<h2>A fancy dialog</h2>
-				<form style="text-align: left;">
-					<label>Name</label>
-					<input class="form-control" type="text" name="name" placeholder="Name" required="required" />
-					<label>Serial number</label>
-					<input class="form-control" type="text" name="serial" placeholder="Serial number" required="required" pattern="^(\d{6})(,\d{6})*$" title="Enter one or more 6-digit numbers, separated by commas" />
-				</form>
-			</script>
-			<script>
-				document.querySelector("#fancydialog button").addEventListener("click", async (evt) => {
-					evt.preventDefault();
-					let dialogData = await fancyDialog({
-						content: document.querySelector("#fancyDialogContent"),
-						initialValues: { name: "Charles", serial: 123456 },
-						buttons: ["Create",{ text:"Abort", type:"abort" }]
-					}).promise;
-					if(dialogData.action==="create"){
-						new fancyAlert("#fancydialog").show("<strong>Result</strong>"+JSON.stringify(dialogData), {
-							icon: '<i class="fa-solid fa-circle-info"></i>',
-							discrete: true
-						});
-					}
-					return false;
-				});
-			</script>
-			<pre class="my-5"><code>
+&lt;/script&gt;
+						</code></pre>
+					</div>
+			
+					<h2>Dialog</h2>
+					<div id="fancydialog">
+						<button type="button" class="btn btn-secondary">
+							Open dialog
+						</button>
+						<script id="fancyDialogContent" type="text/x-template">
+							<h2>A fancy dialog</h2>
+							<form style="text-align: left;">
+								<label>Name</label>
+								<input class="form-control" type="text" name="name" placeholder="Name" required="required" />
+								<label>Serial number</label>
+								<input class="form-control" type="text" name="serial" placeholder="Serial number" required="required" pattern="^(\d{6})(,\d{6})*$" title="Enter one or more 6-digit numbers, separated by commas" />
+							</form>
+						</script>
+						<script>
+							document.querySelector("#fancydialog button").addEventListener("click", async (evt) => {
+								evt.preventDefault();
+								let dialogData = await fancyDialog({
+									content: document.querySelector("#fancyDialogContent"),
+									initialValues: { name: "Charles", serial: 123456 },
+									buttons: ["Create",{ text:"Abort", type:"abort" }]
+								}).promise;
+								if(dialogData.action==="create"){
+									new fancyAlert("#fancydialog").show("<strong>Result</strong>"+JSON.stringify(dialogData), {
+										icon: '<i class="fa-solid fa-circle-info"></i>',
+										discrete: true
+									});
+								}
+								return false;
+							});
+						</script>
+						<pre class="my-5"><code>
 let dialogData = await fancyDialog({
 	content: document.querySelector("#fancyDialogContent"),
 	initialValues: { name: "Charles", serial: 123456 },
@@ -371,25 +503,25 @@ if(dialogData.action==="create"){
 		discrete: true
 	});
 }
-			</code></pre>
-		</div>
-
-		<h2>UI Blocker</h2>
-		<div id="fancyblocker">
-			<button type="button" class="btn btn-secondary">
-				Show blocker for 5 seconds
-			</button>
-			<script>
-				document.querySelector("#fancyblocker button").addEventListener("click", async (evt) => {
-					evt.preventDefault();
-					let blocker = new fancyBlocker({spinner:true}).show();
-					window.setTimeout(()=>{
-						blocker.hide();
-					}, 5000);
-					return false;
-				});
-			</script>
-			<pre class="my-5"><code>
+						</code></pre>
+					</div>
+			
+					<h2>UI Blocker</h2>
+					<div id="fancyblocker">
+						<button type="button" class="btn btn-secondary">
+							Show blocker for 5 seconds
+						</button>
+						<script>
+							document.querySelector("#fancyblocker button").addEventListener("click", async (evt) => {
+								evt.preventDefault();
+								let blocker = new fancyBlocker({spinner:true}).show();
+								window.setTimeout(()=>{
+									blocker.hide();
+								}, 5000);
+								return false;
+							});
+						</script>
+						<pre class="my-5"><code>
 document.querySelector("#fancyblocker button").addEventListener("click", async (evt) =&gt; {
 	evt.preventDefault();
 	let blocker = new fancyBlocker({spinner:true}).show();
@@ -398,10 +530,14 @@ document.querySelector("#fancyblocker button").addEventListener("click", async (
 	}, 5000);
 	return false;
 }
-			</code></pre>
-		</div>
-
+						</code></pre>
+					</div>
+			
+				</div>
+			</article>
+		</section>
 	</div>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -409,6 +545,53 @@ document.querySelector("#fancyblocker button").addEventListener("click", async (
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
 	<script>hljs.highlightAll();</script>
+	<script>
+		if(document.querySelector("section.article-block aside.sidebar")){
+			const style = document.createElement('style');
+			const top = parseFloat(document.querySelector("section").offsetTop);
+			const padding = parseFloat(window.getComputedStyle(document.querySelector("section"), null).getPropertyValue('padding-top')) + parseFloat(window.getComputedStyle(document.querySelector("section"), null).getPropertyValue('padding-bottom'));
+			console.log(top, padding);
+			style.textContent = `aside.sidebar { top: ${top}px !important; height: calc(100vh - ${(top+padding)}px) !important; }`;
+			document.head.appendChild(style);
+		}
+		const hamburger = document.querySelector('.hamburger');
+		hamburger.addEventListener('click', () => {
+			const isOpen = hamburger.classList.toggle('open');
+			hamburger.setAttribute('aria-expanded', isOpen);
+			[...document.querySelectorAll('.sidebar')].forEach(sidebar => {
+				if (isOpen) {
+					sidebar.classList.add('open');
+				} else {
+					sidebar.classList.remove('open');
+				}
+			});
+		});
+		new fancyAutoIndex({toc: 'aside.sidebar', selector: 'div.container>h2'})
+
+		const fancyScrollTo = (anchor) => {
+			let target = document.querySelector(`a[name="${anchor.slice(1)}"]`);
+			console.log(anchor,target)
+			if (target) {
+				const offset = 0;
+				const top = target.offsetTop + offset;
+				window.scrollTo({ top: top });
+			}
+		};
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				window.location.hash=this.getAttribute('href');
+				fancyScrollTo(this.getAttribute('href'));
+			});
+		});
+		window.addEventListener('load', () => {
+			if(location.hash && location.hash!=='#'){
+				window.setTimeout(()=>{
+					fancyScrollTo(location.hash);
+				}, 100);
+			}
+		});
+	</script>
 </body>
 
 </html>

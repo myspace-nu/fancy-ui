@@ -1,14 +1,14 @@
 .fancy-news-carousel {
 	width: 100%;
-	height: 8em;
+	height: 6rem;
 	position: relative;
 	overflow-x: auto;
 	overflow-y: hidden;
 	display: flex;
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 0.5em;
+	border-radius: 0.5rem;
 	background: rgba(255, 255, 255, 0.8);
-	font-size: 0.9em;
+	font-size: 0.9rem;
 	scroll-behavior: auto;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
@@ -22,10 +22,11 @@
 	flex: 0 0 100%;
 	height: 100%;
 	box-sizing: border-box;
-	padding: 1em;
+	padding: .2rem .5rem;
 	display: grid;
 	grid-template-rows: auto 1fr;
 	gap: 6px;
+	position: relative;
 }
 
 .fancy-news-carousel h1,
@@ -40,15 +41,23 @@
 .fancy-news-carousel h2>*,
 .fancy-news-carousel h3>*,
 .fancy-news-carousel h4>* {
-	margin: 0 0.2em;
+	margin: 0 0.2rem;
 }
-
 
 .fancy-news-carousel section article {
 	padding: 0;
 	overflow-y: auto;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
+}
+.fancy-news-carousel section>button {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
 }
 
 .fancy-news-carousel section article::-webkit-scrollbar {

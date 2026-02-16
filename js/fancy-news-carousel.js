@@ -113,9 +113,16 @@ if (typeof window.fancyNewsCarousel === 'undefined') {
 				root.addEventListener('mouseleave', () => {
 					if (!intervalId) intervalId = setInterval(next, options.slideInterval);
 				});
-			  
+
+				if(sessionStorage.getItem("fancy-news-carousel-closed")){
+					root.style.display = "none";
+				}				
 				// Avbryt vertikal autoscroll vid interaktion i body
 				items.forEach(item => {
+					item.querySelector('button')?.addEventListener('click', (evt)=>{
+						evt.target.closest("div").style.display = "none";
+						sessionStorage.setItem("fancy-news-carousel-closed", "true");
+					});
 					const body = item.querySelector('article');
 					if (!body) return;
 					const cancel = () => cancelBodyScroll();
